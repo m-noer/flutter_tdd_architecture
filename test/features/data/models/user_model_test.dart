@@ -9,18 +9,17 @@ import '../../../fixtures/fixture_reader.dart';
 
 void main() {
   final userModel = UserModel(
-    id: 1,
-    email: 'mnoer@outlook.com',
-    first_name: 'Muhammad',
-    last_name: 'Noer',
-    avatar: 'https://reqres.in/img/faces/7-image.jpg',
-  );
+      id: 1,
+      email: 'mnoer@outlook.com',
+      firstName: 'Muhammad',
+      lastName: 'Noer',
+      avatar: 'https://reqres.in/img/faces/7-image.jpg');
 
-  final userResponse = ListUser(
+  final userResponse = UsersResponse(
     page: 2,
-    per_page: 6,
+    perPage: 6,
     total: 12,
-    total_pages: 2,
+    totalPages: 2,
     data: [userModel],
   );
 
@@ -41,7 +40,7 @@ void main() {
           json.decode(fixture('users_response.json'));
 
       // act
-      final result = ListUser.fromMap(jsonMap);
+      final result = UsersResponse.fromJson(jsonMap);
 
       // assert
       expect(result, userResponse); // value of actual and expect must be same

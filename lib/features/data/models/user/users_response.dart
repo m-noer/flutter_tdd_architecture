@@ -1,54 +1,37 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'user_model.dart';
 import '../../../domain/entities/user/user_response_entity.dart';
 import 'package:meta/meta.dart';
 
-class ListUser extends UserResponseEntity {
+part 'users_response.g.dart';
+
+@JsonSerializable()
+class UsersResponse extends UserResponseEntity {
   final List<UserModel> data;
   final int page;
-  final int per_page;
+  @JsonKey(name: 'per_page')
+  final int perPage;
   final int total;
-  final int total_pages;
+  @JsonKey(name: 'total_pages')
+  final int totalPages;
 
-  ListUser({
-    @required this.data,
+  UsersResponse({
+    this.data,
     @required this.page,
-    @required this.per_page,
+    @required this.perPage,
     @required this.total,
-    @required this.total_pages,
+    @required this.totalPages,
   }) : super(
           data: data,
           page: page,
-          per_page: per_page,
+          perPage: perPage,
           total: total,
-          total_pages: total_pages,
+          totalPages: totalPages,
         );
 
-  Map<String, dynamic> toMap() {
-    return {
-      'data': data?.map((x) => x?.toMap())?.toList(),
-      'page': page,
-      'per_page': per_page,
-      'total': total,
-      'total_pages': total_pages,
-    };
-  }
+  factory UsersResponse.fromJson(Map<String, dynamic> json) =>
+      _$UsersResponseFromJson(json);
 
-  factory ListUser.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return ListUser(
-      data: List<UserModel>.from(map['data']?.map((x) => UserModel.fromMap(x))),
-      page: map['page'],
-      per_page: map['per_page'],
-      total: map['total'],
-      total_pages: map['total_pages'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ListUser.fromJson(String source) =>
-      ListUser.fromMap(json.decode(source));
+  Map<String, dynamic> toJson() => _$UsersResponseToJson(this);
 }

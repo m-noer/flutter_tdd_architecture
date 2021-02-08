@@ -1,46 +1,36 @@
-import 'dart:convert';
-
-import '../../../domain/entities/user/user_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+import '../../../domain/entities/user/user_entity.dart';
+
+part 'user_model.g.dart';
+
+@JsonSerializable()
 class UserModel extends UserEntity {
+  final int id;
+  final String email;
+  @JsonKey(name: 'first_name')
+  final String firstName;
+  @JsonKey(name: 'last_name')
+  final String lastName;
+  final String avatar;
+
   UserModel({
-    @required id,
-    @required email,
-    @required first_name,
-    @required last_name,
-    @required avatar,
+    @required this.id,
+    @required this.email,
+    @required this.firstName,
+    this.lastName,
+    this.avatar,
   }) : super(
-            id: id,
-            email: email,
-            first_name: first_name,
-            last_name: last_name,
-            avatar: avatar);
+          id: id,
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          avatar: avatar,
+        );
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'email': email,
-      'first_name': first_name,
-      'last_name': last_name,
-      'avatar': avatar,
-    };
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return UserModel(
-      id: map['id'],
-      email: map['email'],
-      first_name: map['first_name'],
-      last_name: map['last_name'],
-      avatar: map['avatar'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source));
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

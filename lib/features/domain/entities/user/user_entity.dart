@@ -4,25 +4,25 @@ import 'package:meta/meta.dart';
 class UserEntity extends Equatable {
   final int id;
   final String email;
-  final String first_name;
-  final String last_name;
+  final String firstName;
+  final String lastName;
   final String avatar;
 
   UserEntity({
     @required this.id,
     @required this.email,
-    @required this.first_name,
-    @required this.last_name,
-    @required this.avatar,
-  });
+    @required this.firstName,
+    this.lastName,
+    this.avatar,
+  }) : assert(id != null && email != null && firstName != null);
 
   @override
   List<Object> get props {
     return [
       id,
       email,
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       avatar,
     ];
   }
