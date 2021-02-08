@@ -11,4 +11,18 @@ class NetworkInfoImpl implements NetworkInfo {
 
   @override
   Future<bool> get isConnected => connectionChecker.hasConnection;
+
+  // Future<void> onNetworkListen() {
+  //   connectionChecker.onStatusChange.listen((status) {
+  //     switch (status) {
+  //       case DataConnectionStatus.connected:
+  //         print('Data connection is available');
+
+  //         break;
+  //       case DataConnectionStatus.disconnected:
+  //         print('You are disconnected from the internet.');
+  //         break;
+  //     }
+  //   });
+  // }
 }
