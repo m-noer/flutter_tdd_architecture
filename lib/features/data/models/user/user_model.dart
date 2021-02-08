@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_tdd_architecture/features/domain/entities/user/user_entity.dart';
+import '../../../domain/entities/user/user_entity.dart';
 import 'package:meta/meta.dart';
 
 class UserModel extends UserEntity {

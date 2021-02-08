@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import './user_entity.dart';
+import 'user_entity.dart';
 
 class UserResponseEntity extends Equatable {
   final List<UserEntity> data;

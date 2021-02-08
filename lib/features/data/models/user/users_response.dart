@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_tdd_architecture/features/data/models/user/user_model.dart';
-import 'package:flutter_tdd_architecture/features/domain/entities/user/user_response_entity.dart';
+import 'user_model.dart';
+import '../../../domain/entities/user/user_response_entity.dart';
 import 'package:meta/meta.dart';
 
 class ListUser extends UserResponseEntity {
