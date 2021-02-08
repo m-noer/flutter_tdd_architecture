@@ -61,11 +61,11 @@ void main() {
         avatar: 'https://reqres.in/img/faces/7-image.jpg');
 
     final userResponse = UsersResponse(
+      data: [userModel],
       page: 2,
       perPage: 6,
       total: 12,
       totalPages: 2,
-      data: [userModel],
     );
 
     test('should call SharedPreferences to cache the data', () async {
@@ -73,6 +73,7 @@ void main() {
       dataSource.cacheUser(userResponse);
       // assert
       final expectedJsonString = json.encode(userResponse.toJson());
+      print(expectedJsonString);
       verify(mockSharedPreferences.setString(CACHED_USER, expectedJsonString));
     });
   });

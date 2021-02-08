@@ -33,9 +33,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-      return UsersResponse.fromJson(json.decode(response.data));
+      return UsersResponse.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw DioError();
     }
   }
 }
