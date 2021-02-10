@@ -39,7 +39,7 @@ void main() {
 
   void setUpMockHttpClientFailure404() {
     final httpResponse = ResponseBody.fromString(
-      'Something went wrong',
+      DioErrorType.DEFAULT.toString(),
       404,
       headers: {
         Headers.contentTypeHeader: [Headers.jsonContentType],
@@ -63,26 +63,17 @@ void main() {
       expect(response, equals(tUserResponse));
     });
 
-    // test(
-    //     'should throw a ServerException when the response code is  404 or other',
-    //     () async {
-    //   // arrange
-    //   // setUpMockHttpClientFailure404();
-    //   final httpResponse = ResponseBody.fromString(
-    //     'Something went wrong',
-    //     404,
-    //     headers: {
-    //       Headers.contentTypeHeader: [Headers.jsonContentType],
-    //     },
-    //   );
+    test(
+        'should throw a ServerException when the response code is  404 or other',
+        () async {
+      // arrange
+      setUpMockHttpClientFailure404();
 
-    //   when(mockDioAdapter.fetch(any, any, any))
-    //     ..thenAnswer((_) async => httpResponse);
-    //   // act
-    //   final call = await dataSource.getUser();
-    //   // assert
-    //   // ignore: deprecated_member_use
-    //   expect(() => call, throwsA(DioError()));
-    // });
+      // act
+      final call = dataSource.getUser;
+      // assert
+      // ignore: deprecated_member_use
+      expect(() => call(), throwsA(TypeMatcher<ServerException>()));
+    });
   });
 }
