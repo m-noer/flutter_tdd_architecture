@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_tdd_architecture/core/error/failure.dart';
-import 'package:flutter_tdd_architecture/core/usecase/usecase.dart';
-import 'package:flutter_tdd_architecture/features/data/models/user/users_response.dart';
-import 'package:flutter_tdd_architecture/features/domain/usecases/usecases.dart';
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_tdd_architecture/features/domain/entities/user/user_response_entity.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../../data/models/user/users_response.dart';
+import '../../../domain/usecases/usecases.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
@@ -23,7 +25,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({@required GetUser user})
       : assert(user != null),
         getUser = user,
-        super(null);
+        super(UserInitial());
 
   @override
   UserState get initialState => UserInitial();
@@ -32,7 +34,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> mapEventToState(
     UserEvent event,
   ) async* {
-    if (event is GetUser) {
+    if (event is GetUserEvent) {
       yield UserLoading();
       final failureOrUser = await getUser(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrUser);
@@ -40,7 +42,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Stream<UserState> _eitherLoadedOrErrorState(
-    Either<Failure, UsersResponse> failureOrUser,
+    Either<Failure, UserResponseEntity> failureOrUser,
   ) async* {
     yield failureOrUser.fold(
       (failure) => UserError(message: _mapFailureToMessage(failure)),
