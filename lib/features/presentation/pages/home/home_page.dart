@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final userBloc = sl<UserBloc>();
   ThemeMode themeMode = ThemeMode.system;
+  final changeThemeBloc = ChangethemeCubit();
 
   @override
   void initState() {
@@ -89,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                         onChanged: (value) {
-                          context.read<ChangethemeCubit>().toggleTheme(value);
+                          BlocProvider.of<ChangethemeCubit>(context)
+                              .toggleTheme(value);
                           themeMode = value;
                         },
                       ),
