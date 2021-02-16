@@ -1,18 +1,21 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_tdd_architecture/core/network/network_info.dart';
-import 'package:flutter_tdd_architecture/features/data/datasources/local_data_source/user_local_data_source.dart';
-import 'package:flutter_tdd_architecture/features/data/datasources/remote_data_source/user_remote_data_source.dart';
-import 'package:flutter_tdd_architecture/features/data/repositories/user/user_repository_impl.dart';
-import 'package:flutter_tdd_architecture/features/domain/repositories/user/user_repository.dart';
-import 'package:flutter_tdd_architecture/features/domain/usecases/usecases.dart';
-import 'package:flutter_tdd_architecture/features/presentation/bloc/user/user_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'core/network/http_client.dart';
+import 'core/network/network_info.dart';
+import 'features/data/datasources/local_data_source/user_local_data_source.dart';
+import 'features/data/datasources/remote_data_source/user_remote_data_source.dart';
+import 'features/data/repositories/user/user_repository_impl.dart';
+import 'features/domain/repositories/user/user_repository.dart';
+import 'features/domain/usecases/usecases.dart';
+import 'features/presentation/bloc/user/user_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
+
+
   //! Features
   // Bloc
   sl.registerFactory(
@@ -42,10 +45,11 @@ Future<void> init() async {
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton(() => sl<HttpClient>().dio);
+  sl.registerLazySingleton(() => HttpClient(sp: sl()));
 
   //! External
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }

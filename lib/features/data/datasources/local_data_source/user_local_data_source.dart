@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter/rendering.dart';
+import '../../../../core/error/failure.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../core/error/exception.dart';
 import '../../models/user/users_response.dart';
 
 abstract class UserLocalDataSource {
@@ -24,11 +24,15 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   });
   // var box = Hive.box('myBox');
 
+  var logger = Logger();
+
   @override
   Future<void> cacheUser(UsersResponse usersResponse) {
     // return box.put(CACHED_USER, json.encode(usersResponse.toJson()));
     // debugPrint("${usersResponse.toJson()}");
-    String sd = json.encode(usersResponse.toJson());
+    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    String sd = encoder.convert(usersResponse.toJson());
+    logger.d(sd);
     return sp.setString(CACHED_USER, sd);
   }
 
@@ -36,10 +40,12 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   Future<UsersResponse> getUser() {
     // final jsonString = box.get(CACHED_USER);
     final jsonString = sp.get(CACHED_USER);
-    print(jsonString);
+    // logger.d(jsonString);
     // Map<String, dynamic> listUser = json.decode(jsonString);
     if (jsonString != null) {
       return Future.value(UsersResponse.fromJson(json.decode(jsonString)));
+    } else {
+      throw CacheFailure();
     }
   }
 }

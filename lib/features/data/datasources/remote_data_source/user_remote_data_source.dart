@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
@@ -19,8 +18,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   });
 
   @override
-  Future<UsersResponse> getUser() =>
-      _getUserFromUrl('https://reqres.in/api/users?page=2');
+  Future<UsersResponse> getUser() => _getUserFromUrl('users?page=2');
 
   Future<UsersResponse> _getUserFromUrl(String url) async {
     final response = await dio.get(

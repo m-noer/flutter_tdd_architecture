@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
@@ -16,6 +17,7 @@ class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource remoteDataSource;
   final UserLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
+  final DataConnectionChecker connectionChecker = DataConnectionChecker();
 
   UserRepositoryImpl({
     @required this.remoteDataSource,

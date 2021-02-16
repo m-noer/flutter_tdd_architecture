@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_tdd_architecture/core/network/network_info.dart';

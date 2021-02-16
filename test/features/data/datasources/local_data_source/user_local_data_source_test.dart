@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_tdd_architecture/core/error/exception.dart';
 import 'package:flutter_tdd_architecture/features/data/datasources/local_data_source/user_local_data_source.dart';
 import 'package:flutter_tdd_architecture/features/data/models/models.dart';
 import 'package:flutter_test/flutter_test.dart';

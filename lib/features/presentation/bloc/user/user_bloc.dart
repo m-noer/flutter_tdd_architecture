@@ -3,12 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_tdd_architecture/features/domain/entities/user/user_response_entity.dart';
+import '../../../domain/entities/user/user_response_entity.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../../../data/models/user/users_response.dart';
 import '../../../domain/usecases/usecases.dart';
 
 part 'user_event.dart';

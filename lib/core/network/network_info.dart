@@ -17,7 +17,6 @@ class NetworkInfoImpl implements NetworkInfo {
   //     switch (status) {
   //       case DataConnectionStatus.connected:
   //         print('Data connection is available');
-
   //         break;
   //       case DataConnectionStatus.disconnected:
   //         print('You are disconnected from the internet.');
