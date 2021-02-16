@@ -46,7 +46,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async* {
     yield failureOrUser.fold(
       (failure) => UserError(message: _mapFailureToMessage(failure)),
-      (userResponse) => UserLoaded(usersResponse: userResponse),
+      (userResponse) => UserLoaded(userResponseEntity: userResponse),
     );
   }
 

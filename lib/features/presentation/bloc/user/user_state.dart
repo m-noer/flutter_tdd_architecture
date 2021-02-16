@@ -12,14 +12,14 @@ class UserInitial extends UserState {}
 class UserLoading extends UserState {}
 
 class UserLoaded extends UserState {
-  final UsersResponse usersResponse;
+  final UserResponseEntity userResponseEntity;
 
   UserLoaded({
-    @required this.usersResponse,
+    this.userResponseEntity,
   });
 
   @override
-  List<Object> get props => [usersResponse];
+  List<Object> get props => [userResponseEntity];
 }
 
 class UserError extends UserState {

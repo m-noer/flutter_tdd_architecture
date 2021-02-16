@@ -61,7 +61,7 @@ void main() {
       // assert later
       final expected = [
         UserLoading(),
-        UserLoaded(usersResponse: userResponse),
+        UserLoaded(userResponseEntity: userResponse),
       ];
       expectLater(bloc, emitsInOrder(expected));
 
