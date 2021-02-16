@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/error/exception.dart';
@@ -34,14 +35,16 @@ class UserRepositoryImpl implements UserRepository {
   ) async {
     if (await networkInfo.isConnected) {
       try {
+        debugPrint('connected');
         final remoteUser = await getUser2();
-        // localDataSource.cacheUser(remoteUser);
+        localDataSource.cacheUser(remoteUser);
         return Right(remoteUser);
       } on ServerException {
         return Left(ServerFailure());
       }
     } else {
       try {
+        debugPrint('disconnected');
         final localUser = await localDataSource.getUser();
         return Right(localUser);
       } on CacheException {

@@ -1,10 +1,8 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_tdd_architecture/core/error/exception.dart';
-
-import 'package:flutter_tdd_architecture/features/data/models/user/users_response.dart';
 import 'package:meta/meta.dart';
+
+import '../../models/user/users_response.dart';
 
 abstract class UserRemoteDataSource {
   /// Call the endpoint

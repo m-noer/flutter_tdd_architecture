@@ -21,7 +21,7 @@ UsersResponse _$UsersResponseFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$UsersResponseToJson(UsersResponse instance) =>
     <String, dynamic>{
-      'data': instance.data.map((e) => e.toJson()),
+      'data': instance.data.map((e) => e.toJson()).toList(),
       'page': instance.page,
       'per_page': instance.perPage,
       'total': instance.total,
